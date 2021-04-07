@@ -12,4 +12,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>../style.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 </Project>
