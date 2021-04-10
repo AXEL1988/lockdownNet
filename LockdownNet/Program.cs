@@ -1,14 +1,27 @@
 ﻿namespace LockdownNet
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.IO;
     using McMaster.Extensions.CommandLineUtils;
 
     [Command("lockdown")]
-    [VersionOptionFromMember("--version", MemberName= nameof(LockdownVersion))]
+    [VersionOptionFromMember("--version", MemberName = nameof(LockdownVersion))]
     public class Program
     {
         public string LockdownVersion { get; } = "0.0.0";
+
+        [Argument(0, Description = "The first operand")]
+        [Required]
+        public int FirstNumber { get; set; }
+
+        [Argument(1, Description = "Operation to perform")]
+        [Required]
+        public string Operation { get; set; }
+
+        [Argument(2, Description = "The second operand")]
+        [Required]
+        public int SecondNumber { get; set; }
 
         public static int Main(string[] args)
         {
@@ -17,7 +30,15 @@
 
         public int OnExecute(CommandLineApplication app)
         {
-            app.ShowHelp();
+            var result = this.Operation switch
+            {
+                "+" => this.FirstNumber + this.SecondNumber,
+                "-" => this.FirstNumber - this.SecondNumber,
+                "/" => this.FirstNumber / this.SecondNumber,
+                "*" => this.FirstNumber * this.SecondNumber,
+                _ => throw new NotImplementedException($"**The operation {this.Operation} is not implement**"),
+            };
+            Console.WriteLine(result);
             return 0;
         }
     }
