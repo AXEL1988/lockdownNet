@@ -1,10 +1,12 @@
 ﻿namespace LockdownNet
 {
     using System;
+    using LockdownNet.Commands;
     using McMaster.Extensions.CommandLineUtils;
 
     [Command("lockdown")]
     [VersionOptionFromMember("--version", MemberName = nameof(LockdownVersion))]
+    [Subcommand(typeof(BuildCommand))]
     public class Program
     {
         public string LockdownVersion { get; } = "0.0.0";
