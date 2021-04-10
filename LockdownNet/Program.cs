@@ -2,15 +2,23 @@
 {
     using System;
     using System.IO;
+    using McMaster.Extensions.CommandLineUtils;
 
+    [Command("lockdown")]
+    [VersionOptionFromMember("--version", MemberName= nameof(LockdownVersion))]
     public class Program
     {
-        public static void Main(string[] args)
+        public string LockdownVersion { get; } = "0.0.0";
+
+        public static int Main(string[] args)
         {
-            var arguments = string.Join("; ", args);
-            var directory = Directory.GetCurrentDirectory();
-            Console.WriteLine($"Hola me estoy ejecutando en: {directory}");
-            Console.WriteLine(arguments);
+            return CommandLineApplication.Execute<Program>(args);
+        }
+
+        public int OnExecute(CommandLineApplication app)
+        {
+            app.ShowHelp();
+            return 0;
         }
     }
 }
