@@ -19,4 +19,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LockdownNet\LockdownNet.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockdownNet", "LockdownNet\LockdownNet.csproj", "{1CA76FB8-DAA2-4539-AA66-AE14AA889FDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockdownNet", "LockdownNet\LockdownNet.csproj", "{1CA76FB8-DAA2-4539-AA66-AE14AA889FDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockdownNet.Test", "LockdownNet.Test\LockdownNet.Test.csproj", "{36878AAD-5753-4A3D-8522-720CFEDE15F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockdownNet.Test", "LockdownNet.Test\LockdownNet.Test.csproj", "{36878AAD-5753-4A3D-8522-720CFEDE15F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1CA76FB8-DAA2-4539-AA66-AE14AA889FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +41,11 @@ Global
 		{36878AAD-5753-4A3D-8522-720CFEDE15F3}.Release|x64.Build.0 = Release|Any CPU
 		{36878AAD-5753-4A3D-8522-720CFEDE15F3}.Release|x86.ActiveCfg = Release|Any CPU
 		{36878AAD-5753-4A3D-8522-720CFEDE15F3}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13EAC230-E790-490C-8569-ADA719F156AA}
 	EndGlobalSection
 EndGlobal
