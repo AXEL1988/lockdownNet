@@ -2,6 +2,7 @@ using LockdownNet.Commands;
 using LockdownNet.Test.Utils;
 using System;
 using Xunit;
+using Shouldly;
 
 namespace LockdownNet.Test
 {
@@ -16,8 +17,8 @@ namespace LockdownNet.Test
             buildCommand.OnExecute();
 
             string writtenText = testConsole.GetWrittenContent();
-            
-            Assert.Equal("You execute the build command\r\n", writtenText);
+            writtenText.ShouldBe("You execute the build command\r\n");
+            //Assert.Equal("You execute the build command\r\n", writtenText);
         }
     }
 }
