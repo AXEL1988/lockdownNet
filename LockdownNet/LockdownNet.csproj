@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -11,8 +11,8 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
     <PackageId>Lockdown.Net</PackageId>
-    <AssemblyVersion>0.0.1</AssemblyVersion>
-    <Version>0.0.1</Version>
+    0.0.2
+    0.0.2
 
     <Authors>Edison Fernández</Authors>
     <Title>Lockdown Net</Title>
