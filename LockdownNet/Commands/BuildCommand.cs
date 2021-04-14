@@ -13,7 +13,7 @@
 
         public int OnExecute()
         {
-            this.console.WriteLine($"You execute the build command");
+            this.console.WriteLine($"Pleas do not use, alpha");
             return 0;
         }
     }
