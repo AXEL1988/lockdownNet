@@ -17,7 +17,7 @@ namespace LockdownNet.Test
             buildCommand.OnExecute();
 
             string writtenText = testConsole.GetWrittenContent();
-            writtenText.ShouldBe("You execute the build command" + Environment.NewLine);
+            writtenText.ShouldBe("Pleas do not use, alpha" + Environment.NewLine);
             //Assert.Equal("You execute the build command\r\n", writtenText);
         }
     }
