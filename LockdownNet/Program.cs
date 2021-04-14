@@ -10,7 +10,7 @@ namespace LockdownNet
     [Subcommand(typeof(BuildCommand))]
     public class Program
     {
-        public string LockdownVersion { get; } = "0.0.0";
+        public string LockdownVersion { get; } = "0.0.1";
 
         public static int Main(string[] args)
         {
