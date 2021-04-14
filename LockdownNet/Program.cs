@@ -1,4 +1,4 @@
-﻿namespace LockdownNet
+namespace LockdownNet
 {
     using System;
     using LockdownNet.Commands;
