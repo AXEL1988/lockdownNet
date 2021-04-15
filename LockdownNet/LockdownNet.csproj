@@ -11,8 +11,8 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
     <PackageId>Lockdown.Net</PackageId>
-    <AssemblyVersion>0.0.4</AssemblyVersion>
-    <Version>0.0.4</Version>
+    <AssemblyVersion>0.0.6</AssemblyVersion>
+    <Version>0.0.6</Version>
 
     <Authors>Edison Fernández</Authors>
     <Title>Lockdown Net</Title>
