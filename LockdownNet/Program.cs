@@ -1,6 +1,7 @@
 namespace LockdownNet
 {
     using System;
+    using System.IO.Abstractions;
     using LockdownNet.Build;
     using LockdownNet.Commands;
     using McMaster.Extensions.CommandLineUtils;
@@ -16,6 +17,7 @@ namespace LockdownNet
         public static int Main(string[] args)
         {
             ServiceProvider services = new ServiceCollection()
+                .AddSingleton<IFileSystem, FileSystem>()
                 .AddSingleton<ISiteBuilder, SiteBuilder>()
                 .AddSingleton<IConsole>(PhysicalConsole.Singleton)
                 .BuildServiceProvider();
