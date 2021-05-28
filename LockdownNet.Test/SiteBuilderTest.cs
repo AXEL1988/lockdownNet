@@ -11,7 +11,7 @@ namespace LockdownNet.Test
     {
         private readonly IFileSystem fakeFileSystem;
         const string inputPath = "./input";
-        const string output = "./output";
+        const string output = ".\\output\\";
         public SiteBuilderTest()
         {
             fakeFileSystem = new MockFileSystem();
@@ -22,7 +22,7 @@ namespace LockdownNet.Test
         {
             // Setup
             var fakeFilePath = fakeFileSystem.Path.Combine(output, "archivo.txt");
-            fakeFileSystem.Directory.CreateDirectory(fakeFilePath);
+            fakeFileSystem.Directory.CreateDirectory(output);
             fakeFileSystem.File.WriteAllText(fakeFilePath, "Hola mundo");
 
             var siteBuilder = new SiteBuilder(fakeFileSystem);
@@ -30,9 +30,7 @@ namespace LockdownNet.Test
             siteBuilder.CleanFolder(output);
 
             // Assert
-            fakeFileSystem.Directory.Exists(output).ShouldBeTrue();
-            fakeFileSystem.Directory.EnumerateFiles(output).Any().ShouldBeFalse();
-            fakeFileSystem.Directory.EnumerateDirectories(output).Any().ShouldBeTrue();
+            this.AssertDirectoryIsEmpty(output);
         }
 
         [Fact]
@@ -43,9 +41,14 @@ namespace LockdownNet.Test
             siteBuilder.CleanFolder(output);
 
             // Assert
+            this.AssertDirectoryIsEmpty(output);
+        }
+
+        private void AssertDirectoryIsEmpty(string output)
+        {
             fakeFileSystem.Directory.Exists(output).ShouldBeTrue();
             fakeFileSystem.Directory.EnumerateFiles(output).Any().ShouldBeFalse();
-            fakeFileSystem.Directory.EnumerateDirectories(output).Any().ShouldBeTrue();
+            fakeFileSystem.Directory.EnumerateDirectories(output).Any().ShouldBeFalse();
         }
     }
 }
