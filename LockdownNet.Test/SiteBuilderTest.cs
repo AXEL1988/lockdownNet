@@ -1,6 +1,7 @@
 ﻿using LockdownNet.Build;
 using Moq;
 using Shouldly;
+using System.Collections.Generic;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
@@ -44,7 +45,6 @@ namespace LockdownNet.Test
             // Assert
             this.AssertDirectoryIsEmpty(output);
         }
-
         [Fact]
         public void TestBuildCallsClean()
         {
@@ -55,6 +55,46 @@ namespace LockdownNet.Test
             siteBuilder.Build(inputPath, output);
 
             mockSiteBuilder.Verify(sb => sb.CleanFolder(output));
+        }
+
+        [Fact]
+        public void TestCopyFile()
+        {
+            // Setup
+            var stylesFile = this.fakeFileSystem.Path.Combine(inputPath, "style.css");
+            var someOtherFile = this.fakeFileSystem.Path.Combine(inputPath, "subfolder", "style.css");
+
+            var contents = new Dictionary<string, MockFileData>
+            {
+                {stylesFile, new MockFileData("body { color: #fff; }") },
+                {someOtherFile, new MockFileData("more data") }
+            };
+
+            var fakeFileSyste = new MockFileSystem(contents);
+            fakeFileSyste.Directory.CreateDirectory(output);
+            var siteBuilder = new SiteBuilder(fakeFileSyste);
+
+            // Act
+            siteBuilder.CopyFiles(inputPath, output);
+
+            // Assert
+            fakeFileSyste.Directory.EnumerateFiles(output, "*.*", System.IO.SearchOption.AllDirectories).Count().ShouldBe(2);
+
+        }
+
+        [Fact]
+        public void TestBuildCallsOtherMethods()
+        {
+            var mockSiteBuilder = new Mock<SiteBuilder>(MockBehavior.Strict, this.fakeFileSystem);
+            mockSiteBuilder.Setup(sb => sb.CleanFolder(output));
+            mockSiteBuilder.Setup(sb => sb.CopyFiles(inputPath, output));
+            SiteBuilder siteBuilder = mockSiteBuilder.Object;
+
+            siteBuilder.Build(inputPath, output);
+
+            mockSiteBuilder.Verify(sb => sb.CleanFolder(output));
+            mockSiteBuilder.Verify(sb => sb.CopyFiles(inputPath, output));
+            
         }
         private void AssertDirectoryIsEmpty(string output)
         {
