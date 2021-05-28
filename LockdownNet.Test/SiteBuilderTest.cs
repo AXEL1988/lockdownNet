@@ -1,4 +1,5 @@
 ﻿using LockdownNet.Build;
+using Moq;
 using Shouldly;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
@@ -44,6 +45,17 @@ namespace LockdownNet.Test
             this.AssertDirectoryIsEmpty(output);
         }
 
+        [Fact]
+        public void TestBuildCallsClean()
+        {
+            var mockSiteBuilder = new Mock<SiteBuilder>(MockBehavior.Strict, this.fakeFileSystem);
+            mockSiteBuilder.Setup(sb => sb.CleanFolder(output));
+            SiteBuilder siteBuilder = mockSiteBuilder.Object;
+
+            siteBuilder.Build(inputPath, output);
+
+            mockSiteBuilder.Verify(sb => sb.CleanFolder(output));
+        }
         private void AssertDirectoryIsEmpty(string output)
         {
             fakeFileSystem.Directory.Exists(output).ShouldBeTrue();
