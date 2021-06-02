@@ -3,6 +3,8 @@ using LockdownNet.Test.Utils;
 using System;
 using Xunit;
 using Shouldly;
+using Moq;
+using LockdownNet.Build;
 
 namespace LockdownNet.Test
 {
@@ -11,14 +13,21 @@ namespace LockdownNet.Test
         [Fact]
         public void TestWriteToConsole()
         {
+            // Setup
             var testConsole = new TestConsole();
-            var buildCommand = new BuildCommand(testConsole);
-
+            var mockSiteBuilder = new Mock<ISiteBuilder>();
+            var inputPath = "./";
+            var outputhPath = "./_site";
+            
+            var buildCommand = new BuildCommand(testConsole, siteBuilder: mockSiteBuilder.Object);
+            buildCommand.InputPath = inputPath;
+            buildCommand.OutputPath = outputhPath;
+            
+            // Act
             buildCommand.OnExecute();
 
-            string writtenText = testConsole.GetWrittenContent();
-            writtenText.ShouldBe("Pleas do not use, alpha" + Environment.NewLine);
-            //Assert.Equal("You execute the build command\r\n", writtenText);
+            // Assert
+            mockSiteBuilder.Verify(sb => sb.Build(inputPath, outputhPath), Times.Once);
         }
     }
 }
